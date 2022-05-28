@@ -1,0 +1,36 @@
+version: "3.9"
+services:
+  client:
+    image: jecht/nio-app
+    container_name: nio-app
+    cpuset: 0,1
+    cpu_count: 2
+    memswap_limit: 500m
+    ports:
+      - "8686:8686"
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 500m
+          pids: 1
+        reservations:
+          cpus: '2'
+          memory: 500m
+  server:
+    image: jecht/spring-slow-app
+    container_name: slow-app
+    cpuset: 2,3
+    cpu_count: 2
+    memswap_limit: 500m
+    ports:
+      - "8080:8080"
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 500m
+          pids: 1
+        reservations:
+          cpus: '2'
+          memory: 500m
